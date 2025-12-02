@@ -1,35 +1,90 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*, java.time.*, java.time.temporal.ChronoUnit" %>
 <%
+    // 1. Retrieve parameters from the previous page
     String roomId = request.getParameter("room_id");
     String checkin = request.getParameter("checkin");
     String checkout = request.getParameter("checkout");
     String name = request.getParameter("name");
     String email = request.getParameter("email");
+    
+    // Default values
     double totalAmount = 0;
     String hotelName = "Booking Hotel";
     long nights = 0;
+    String message = "";
 
+    // Parse amount safely
     try {
         totalAmount = Double.parseDouble(request.getParameter("total_amount"));
     } catch (Exception e) {}
+
+    // Get the logged-in user's username from the session
+    String sessionUser = (String) session.getAttribute("user");
 
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_booking", "root", "hello123");
 
-        PreparedStatement ps = con.prepareStatement(
-            "SELECT h.name FROM rooms r JOIN hotels h ON r.hotel_id = h.id WHERE r.id = ?");
-        ps.setInt(1, Integer.parseInt(roomId));
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) hotelName = rs.getString("name");
+        // ---------------------------------------------------------
+        // STEP 1: Get the User ID based on the session username
+        // ---------------------------------------------------------
+        int userId = -1;
+        PreparedStatement psUser = con.prepareStatement("SELECT id FROM users WHERE username = ?");
+        psUser.setString(1, sessionUser);
+        ResultSet rsUser = psUser.executeQuery();
+        
+        if (rsUser.next()) {
+            userId = rsUser.getInt("id");
+        }
 
+        // ---------------------------------------------------------
+        // STEP 2: Insert the Booking into the Database
+        // ---------------------------------------------------------
+        if (userId != -1) {
+            PreparedStatement psInsert = con.prepareStatement(
+                "INSERT INTO bookings (user_id, room_id, check_in, check_out, name, email, status) VALUES (?, ?, ?, ?, ?, ?, 'confirmed')");
+            psInsert.setInt(1, userId);
+            psInsert.setInt(2, Integer.parseInt(roomId));
+            psInsert.setString(3, checkin);
+            psInsert.setString(4, checkout);
+            psInsert.setString(5, name);
+            psInsert.setString(6, email);
+            
+            int rowsAffected = psInsert.executeUpdate();
+
+            // ---------------------------------------------------------
+            // STEP 3: Mark the Room as 'Booked' (Unavailable)
+            // ---------------------------------------------------------
+            if (rowsAffected > 0) {
+                PreparedStatement psUpdate = con.prepareStatement("UPDATE rooms SET available = 0 WHERE id = ?");
+                psUpdate.setInt(1, Integer.parseInt(roomId));
+                psUpdate.executeUpdate();
+            }
+        }
+
+        // ---------------------------------------------------------
+        // STEP 4: Fetch Hotel Name for Display
+        // ---------------------------------------------------------
+        PreparedStatement psHotel = con.prepareStatement(
+            "SELECT h.name FROM rooms r JOIN hotels h ON r.hotel_id = h.id WHERE r.id = ?");
+        psHotel.setInt(1, Integer.parseInt(roomId));
+        ResultSet rsHotel = psHotel.executeQuery();
+        if (rsHotel.next()) {
+            hotelName = rsHotel.getString("name");
+        }
+
+        // Calculate nights for display
         LocalDate checkInDate = LocalDate.parse(checkin);
         LocalDate checkOutDate = LocalDate.parse(checkout);
         nights = ChronoUnit.DAYS.between(checkInDate, checkOutDate);
 
         con.close();
-    } catch (Exception e) {}
+    } catch (Exception e) {
+        // Log error to console for debugging
+        System.out.println("Error in success.jsp: " + e.getMessage());
+        message = "Error saving booking: " + e.getMessage();
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -156,9 +211,14 @@
                 <span>₹<%= String.format("%.0f", totalAmount) %></span>
             </div>
         </div>
+        
+        <% if(!message.isEmpty()) { %>
+            <p style="color: red; font-size: 12px;"><%= message %></p>
+        <% } %>
 
         <div class="btn-group">
             <a href="index.jsp" class="btn">Back to Home</a>
+            <br><br>
             <a href="myBookings.jsp" class="btn">View My Bookings</a>
         </div>
 
