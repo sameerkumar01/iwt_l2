@@ -40,7 +40,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login • LuxStay</title>
+    <title>Login • Booking</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -159,7 +159,7 @@
 <body>
 
 <div class="login-card">
-    <div class="logo">LuxStay</div>
+    <div class="logo">Booking</div>
     <p class="tagline">Welcome back! Please login to continue</p>
 
     <h2>Login</h2>
@@ -181,11 +181,11 @@
             <input type="password" name="password" placeholder="Enter your password" required>
         </div>
 
-        <button type="submit" class="login-btn">Login to LuxStay</button>
+        <button type="submit" class="login-btn">Login to Booking</button>
     </form>
 
     <div class="footer-text">
-        New to LuxStay? <a href="register.jsp">Create an account</a>
+        New to Booking? <a href="register.jsp">Create an account</a>
     </div>
 </div>
 

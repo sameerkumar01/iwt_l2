@@ -9,7 +9,7 @@
     double totalAmount = Double.parseDouble(request.getParameter("total_amount"));
 
     // --- Fetch Hotel Name ---
-    String hotelName = "LuxStay Hotel";
+    String hotelName = "Booking Hotel";
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_booking", "root", "hello123");
@@ -20,7 +20,7 @@
         if (rs.next()) hotelName = rs.getString("name");
         con.close();
     } catch (Exception e) {
-        hotelName = "LuxStay Hotel";
+        hotelName = "Booking Hotel";
     }
 
     // --- Calculate nights (NEVER use variable name "out" in JSP!) ---

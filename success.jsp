@@ -7,7 +7,7 @@
     String name = request.getParameter("name");
     String email = request.getParameter("email");
     double totalAmount = 0;
-    String hotelName = "LuxStay Hotel";
+    String hotelName = "Booking Hotel";
     long nights = 0;
 
     try {
@@ -36,7 +36,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking Confirmed • LuxStay</title>
+    <title>Booking Confirmed • Booking</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;}

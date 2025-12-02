@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LuxStay - Book Hotels in India</title>
+    <title>Booking - Book Hotels in India</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
         body{
@@ -43,7 +43,7 @@
 <body>
 
 <header>
-    <div class="logo">LuxStay</div>
+    <div class="logo">Booking</div>
     <div class="user-info">
         <% if(session.getAttribute("user")==null){ %>
             <a href="login.jsp">Sign In</a>

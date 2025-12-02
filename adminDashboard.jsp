@@ -11,7 +11,7 @@ if (!"admin".equals(session.getAttribute("role"))) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard • LuxStay</title>
+    <title>Admin Dashboard • Booking</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
         body{background:#f5f7fa; color:#333;}
@@ -78,7 +78,7 @@ if (!"admin".equals(session.getAttribute("role"))) {
 <body>
 
 <header>
-    <div class="logo">LuxStay Admin</div>
+    <div class="logo">Booking Admin</div>
     <div class="user-info">
         Welcome, <b>Admin</b>
         <a href="index.jsp">Back to Home</a>

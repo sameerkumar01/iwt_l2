@@ -48,7 +48,7 @@ double totalAmount = pricePerNight * nights;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Your Booking • LuxStay</title>
+    <title>Complete Your Booking • Booking</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
         body{background:#f5f7fa;color:#333;}
@@ -81,7 +81,7 @@ double totalAmount = pricePerNight * nights;
 <body>
 
 <header>
-    <div class="logo">LuxStay</div>
+    <div class="logo">Booking</div>
     <div class="user-info">
         Welcome, <b><%= session.getAttribute("user") %></b>
         <a href="myBookings.jsp">My Bookings</a>

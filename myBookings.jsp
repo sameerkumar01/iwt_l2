@@ -33,7 +33,7 @@ if (cancel != null && !cancel.isEmpty()) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Bookings • LuxStay</title>
+    <title>My Bookings • Booking</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
         body{background:#f5f7fa; color:#333;}
@@ -102,7 +102,7 @@ if (cancel != null && !cancel.isEmpty()) {
 <body>
 
 <header>
-    <div class="logo">LuxStay</div>
+    <div class="logo">Booking</div>
     <div class="user-info">
         Welcome, <b><%= session.getAttribute("user") %></b>
         <a href="index.jsp">Home</a>
