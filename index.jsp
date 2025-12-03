@@ -9,7 +9,7 @@
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
         body{
             background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.6)),
-                        url('https://images.unsplash.com/photo-1522706323590-d12735c8ea97?w=1600') center/cover;
+                        url('https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?_gl=1*lhgy8f*_ga*MTExODM4NjQ2MS4xNzYxODQ2ODMy*_ga_8JE65Q40S6*czE3NjQ3MDA4NTQkbzYkZzEkdDE3NjQ3MDA4NzEkajQzJGwwJGgw') center/cover;
             min-height:100vh; color:white;
         }
         header{
